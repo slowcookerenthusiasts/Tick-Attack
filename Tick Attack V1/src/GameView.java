@@ -16,26 +16,36 @@ public class GameView extends JFrame implements IGameView{
 	private JButton quest2Button;
 	private QuestView quest1View;
 	private QuestView quest2View;
+	private JButton startButton;
+	private QuestController questController;
 	
 	private DefaultListModel<String> inventoryLM;
 	
 	public GameView(String title)  {
 		
+		 questController = new QuestController();
+		 quest1View = questController.getFirstQuestView();
+		 quest2View = questController.getSecondQuestView();
+		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		panel = (JPanel) getContentPane();
 		panel.setLayout(new FlowLayout());
 		
-		JButton startButton = makeStartButton();
+		startButton = makeStartButton();
 		
 		streetCred = makeStreetCredLabel();
 		health = makeHealthLabel();
 		inventory = makeInventoryList();
 		
-		panel.add(startButton);
 		
 		pack();
 		setSize(400,400);
 		setVisible(true);
+	}
+	
+	public void showStartButton() {
+		panel.add(startButton);
+		panel.updateUI();
 	}
 	
 	private JButton makeStartButton() {
@@ -116,7 +126,8 @@ public class GameView extends JFrame implements IGameView{
 		quest1Button.add(label);
 		quest1Button.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-
+				quest1View.displayText("Tree planting quest");
+				removeFromView(quest1Button);
 			}
 			});
 		return quest1Button;
@@ -135,7 +146,8 @@ public class GameView extends JFrame implements IGameView{
 		quest2Button.add(label);
 		quest2Button.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-
+				quest2View.displayText("Antibiotic smuggling quest");
+				removeFromView(quest2Button);
 			}
 			});
 		return quest2Button;

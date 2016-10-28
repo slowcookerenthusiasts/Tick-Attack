@@ -27,7 +27,8 @@ public class GameController{
 		return true;
 	}
 
-	public void run() {	
+	public void run() {
+		view.showStartButton();
 		Player player = gameModel.getPlayer();
 		Timer t = new Timer();
 		t.schedule(player, 0, 1000);
