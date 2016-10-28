@@ -17,8 +17,11 @@ public class GameView extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		panel = (JPanel) getContentPane();
 		panel.setLayout(new FlowLayout());
+		
 		JButton startButton = makeStartButton();
-		streetCred = makeStreetCredButton();
+		
+		streetCred = makeStreetCredLabel();
+		health = makeHealthLabel();
 		
 		panel.add(startButton);
 		
@@ -39,6 +42,7 @@ public class GameView extends JFrame {
 		startButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				removeFromView(startButton);
+				panel.add(health);
 				panel.add(streetCred);
 			}
 			}); 
@@ -49,14 +53,21 @@ public class GameView extends JFrame {
 		panel.updateUI();
 	}
 	
-	private JLabel makeStreetCredButton() {
-		JLabel streetCredButton = new JLabel();
-		streetCredButton.setText("Current street cred: ");
-		return streetCredButton;
+	private JLabel makeStreetCredLabel() {
+		JLabel streetCredLabel = new JLabel();
+		streetCredLabel.setText("Current street cred: ");
+		return streetCredLabel;
+	}
+	
+	private JLabel makeHealthLabel() {
+		JLabel healthLabel = new JLabel();
+		healthLabel.setText("Current health points: ");
+		return healthLabel;
 	}
 	
 	public void showHealth(int value) {
-				
+		health.setText("Current health points: " + value);	
+		panel.updateUI();
 	}
 	
 	public void showStreetCred(int value) {

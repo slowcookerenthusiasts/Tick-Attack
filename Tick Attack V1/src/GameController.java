@@ -24,10 +24,6 @@ public class GameController{
 
 	public boolean isOver() {
 
-		for(int i = 0; i < 4500; i++) {
-
-		}
-
 		return true;
 	}
 
@@ -36,7 +32,9 @@ public class GameController{
 		Timer t = new Timer();
 		t.schedule(player, 0, 1000);
 		while(true) {
+			view.showHealth(player.getHealth());
 			view.showStreetCred(player.getStreetCred());
+			
 		}
 	}
 
