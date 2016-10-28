@@ -1,7 +1,9 @@
+import java.awt.Component;
+
 
 public interface IGameView {
 	
-	public void removeFromView();
+	public void removeFromView(Component c);
 	
 	public void showHealth();
 	
