@@ -1,4 +1,6 @@
-public class Player {
+import java.util.TimerTask;
+
+public class Player extends TimerTask {
 	
 	int streetCred;
 	int health;
@@ -8,11 +10,15 @@ public class Player {
 		health = 100;
 	}
 	
+	public void run() {
+		increaseStreetCred();
+	}
+	
 	public void increaseStreetCred() {
 		streetCred++;
 	}
 	
-	public void increaseStretCredBy(int value) {
+	public void increaseStreetCredBy(int value) {
 		streetCred = streetCred + value;
 	}
 	

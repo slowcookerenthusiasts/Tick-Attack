@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Frame;
@@ -10,21 +9,18 @@ import javax.swing.*;
 public class GameView extends JFrame {
 	
 	JPanel panel;
-	private GameModel model;
 	private JLabel health;
 	private JLabel streetCred;
 	
-	public GameView(String title, GameModel gModel)  {
-		model = gModel;
-		streetCred = new JLabel();
+	public GameView(String title)  {
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		panel = (JPanel) getContentPane();
 		panel.setLayout(new FlowLayout());
 		JButton startButton = makeStartButton();
+		streetCred = makeStreetCredButton();
 		
 		panel.add(startButton);
-		panel.add(streetCred);
 		
 		pack();
 		setSize(400,400);
@@ -43,7 +39,7 @@ public class GameView extends JFrame {
 		startButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				removeFromView(startButton);
-				
+				panel.add(streetCred);
 			}
 			}); 
 		return startButton;
@@ -53,14 +49,18 @@ public class GameView extends JFrame {
 		panel.updateUI();
 	}
 	
-	
+	private JLabel makeStreetCredButton() {
+		JLabel streetCredButton = new JLabel();
+		streetCredButton.setText("Current street cred: ");
+		return streetCredButton;
+	}
 	
 	public void showHealth(int value) {
 				
 	}
 	
 	public void showStreetCred(int value) {
-		streetCred.setText("Current street cred " + value);
+		streetCred.setText("Current street cred: " + value);
 		panel.updateUI();
 	}
 	
