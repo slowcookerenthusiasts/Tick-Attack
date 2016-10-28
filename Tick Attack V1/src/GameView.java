@@ -15,7 +15,10 @@ public class GameView extends JFrame {
 	private JLabel health;
 	private JLabel streetCred;
 	private JScrollPane inventory;
-	private DefaultListModel inventoryLM;
+	private JButton quest1Button;
+	private JButton quest2Button;
+	
+	private DefaultListModel<String> inventoryLM;
 	
 	public GameView(String title)  {
 		
@@ -84,10 +87,10 @@ public class GameView extends JFrame {
 	}
 	
 	public JScrollPane makeInventoryList() {
-		inventoryLM = new DefaultListModel<JLabel>();
+		inventoryLM = new DefaultListModel<String>();
 		JLabel title = new JLabel();
 		title.setText("Inventory");
-		JList inventoryList = new JList(inventoryLM);
+		JList<String> inventoryList = new JList<String>(inventoryLM);
 		inventoryList.setVisibleRowCount(10);
 		inventoryLM.addElement("Inventory:");
 		
@@ -100,6 +103,33 @@ public class GameView extends JFrame {
 		}
 		panel.updateUI();
 	}
+	
+	public void showQuest1Button() {
+		panel.add(makeQuest1Button());
+		panel.updateUI();
+	}
+	
+	public JButton makeQuest1Button() {
+		quest1Button = new JButton();
+		JLabel label = new JLabel("Start tree planting quest");
+		label.setHorizontalAlignment(JButton.CENTER);
+		label.setVerticalAlignment(JButton.CENTER);
+		quest1Button.add(label);
+		return quest1Button;
+	}
+	
+	public void showQuest2Button() {
+		panel.add(makeQuest2Button());
+		panel.updateUI();
+	}
+	
+	public JButton makeQuest2Button() {
+		quest2Button = new JButton();
+		JLabel label = new JLabel("Start antibiotic smuggling quest");
+		label.setHorizontalAlignment(JButton.CENTER);
+		label.setVerticalAlignment(JButton.CENTER);
+		quest2Button.add(label);
+		return quest2Button;
+	}
 
-	//show health,streetcred, inventory, etc.
 }
