@@ -39,10 +39,10 @@ public class GameController{
 		
 		while(true) {
 			view.showStreetCred(player.getStreetCred());
-			if((player.getStreetCred() == 10) && (calledQ1 == false)) {
+			if((player.getStreetCred() == 10) && (calledQ1 == false) && (view.hasStarted())) {
 				view.showQuest1Button();
 				calledQ1 = true;
-			} else if ((player.getStreetCred() == 20) && (calledQ2 == false)) {
+			} else if ((player.getStreetCred() == 20) && (calledQ2 == false) && (view.hasStarted())) {
 				view.showQuest2Button();
 				calledQ2 = true;
 			}

@@ -8,6 +8,7 @@ import javax.swing.*;
 
 public class GameView extends JFrame implements IGameView{
 	
+	private boolean hasStarted = false;
 	private JPanel panel;
 	private JLabel health;
 	private JLabel streetCred;
@@ -59,6 +60,7 @@ public class GameView extends JFrame implements IGameView{
 		
 		startButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				hasStarted = true;
 				removeFromView(startButton);
 				panel.add(health);
 				panel.add(streetCred);
@@ -71,6 +73,10 @@ public class GameView extends JFrame implements IGameView{
 	public void removeFromView(Component c) {
 		panel.remove(c);
 		panel.updateUI();
+	}
+	
+	public boolean hasStarted() {
+		return hasStarted;
 	}
 	
 	private JLabel makeStreetCredLabel() {

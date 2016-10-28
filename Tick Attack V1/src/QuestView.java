@@ -8,9 +8,6 @@ public class QuestView extends JFrame{
 	
 	private JPanel panel;
 	
-	public QuestView() {
-	}
-	
 	public void displayText(String questTitle) {
 		panel = (JPanel) getContentPane();
 		panel.setLayout(new FlowLayout());
