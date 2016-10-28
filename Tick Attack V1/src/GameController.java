@@ -31,10 +31,10 @@ public class GameController{
 		Player player = gameModel.getPlayer();
 		Timer t = new Timer();
 		t.schedule(player, 0, 1000);
+		view.showHealth(player.getHealth());
+		view.showInventory(player.getInventory());
 		while(true) {
-			view.showHealth(player.getHealth());
 			view.showStreetCred(player.getStreetCred());
-			
 		}
 	}
 
