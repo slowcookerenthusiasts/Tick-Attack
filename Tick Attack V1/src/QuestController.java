@@ -1,4 +1,3 @@
-
 public class QuestController {
 
 	private GameModel gameModel;

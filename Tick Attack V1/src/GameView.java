@@ -1,15 +1,12 @@
-import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.FlowLayout;
-import java.awt.Frame;
-import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionListener;
-public class GameView extends JFrame {
+
+public class GameView extends JFrame implements IGameView{
 	
 	private JPanel panel;
 	private JLabel health;
@@ -17,6 +14,8 @@ public class GameView extends JFrame {
 	private JScrollPane inventory;
 	private JButton quest1Button;
 	private JButton quest2Button;
+	private QuestView quest1View;
+	private QuestView quest2View;
 	
 	private DefaultListModel<String> inventoryLM;
 	
@@ -115,6 +114,11 @@ public class GameView extends JFrame {
 		label.setHorizontalAlignment(JButton.CENTER);
 		label.setVerticalAlignment(JButton.CENTER);
 		quest1Button.add(label);
+		quest1Button.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+
+			}
+			});
 		return quest1Button;
 	}
 	
@@ -129,6 +133,11 @@ public class GameView extends JFrame {
 		label.setHorizontalAlignment(JButton.CENTER);
 		label.setVerticalAlignment(JButton.CENTER);
 		quest2Button.add(label);
+		quest2Button.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+
+			}
+			});
 		return quest2Button;
 	}
 
