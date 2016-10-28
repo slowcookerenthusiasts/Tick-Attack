@@ -4,9 +4,11 @@ public class GameModel {
 	private ArrayList<QuestDecisionPoint> questDirectory = new ArrayList<QuestDecisionPoint>();
 	private  QuestDecisionPoint activeQuest;
 	private Player player;
+	private GameView view;
 	
-	public void setPlayer(Player inputPlayer) {
+	public void setPlayer(Player inputPlayer, GameView gView) {
 		player = inputPlayer;
+		view = gView;
 	}
 	
 	public void setActiveQuest(QuestDecisionPoint inputActiveQuest) {
@@ -28,5 +30,7 @@ public class GameModel {
 	public ArrayList<QuestDecisionPoint> getQuestDirectory() {
 		return questDirectory;
 	}
+	
+	
 	
  }
