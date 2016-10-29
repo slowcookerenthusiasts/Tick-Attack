@@ -5,12 +5,14 @@ public class GameMain {
 		Player player = new Player();
 		player.addToInventory(new Item("Cellphone", 0));
 		player.addToInventory(new Item("Lipstick", 0));
-		GameModel model = new GameModel(player);
-		GameView view = new GameView("test");
+		
 		QuestController qController = new QuestController();
+		GameModel model = new GameModel(player);
+		GameView view = new GameView("test", qController);
+		
 		GameController controller = new GameController(view, qController, model);
+			
 		controller.runGame();
-
 	}
 
 }

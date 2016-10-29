@@ -3,15 +3,15 @@ import java.util.Timer;
 public class GameController{
 
 	private GameView view;
-	private QuestController questController;
+	//private QuestController questController;
 	private GameModel gameModel;
 	private Player player;
-	boolean calledQ1 = false;
-	boolean calledQ2 = false;
+	boolean quest1ButtonActive = false;
+	boolean quest2ButtonActive = false;
 
 	public GameController(GameView gView, QuestController qController, GameModel gModel) {
 		view = gView;
-		questController = qController;
+		//questController = qController;
 		gameModel = gModel;
 		player = gameModel.getPlayer();
 	}
@@ -33,19 +33,19 @@ public class GameController{
 		initializeGame();	
 		while(true) {
 			updateStreetCred();
-			unlockQuest(calledQ1, 10);
-			unlockQuest(calledQ2, 20);
+			unlockQuest(quest1ButtonActive, 10);
+			unlockQuest(quest2ButtonActive, 20);
 		}
 	}
 	
-	private void unlockQuest(boolean hasBeenCalled, int minStreetCred) {
-		if ((player.getStreetCred() == minStreetCred) && (hasBeenCalled == false) && (view.hasStarted())) {
+	private void unlockQuest(boolean questVisible, int minStreetCred) {
+		if ((player.getStreetCred() == minStreetCred) && (questVisible == false) && (view.hasStarted())) {
 			if (minStreetCred == 10) {
 				view.showQuest1Button();
-				calledQ1 = true;
+				quest1ButtonActive = true;
 			} else if (minStreetCred == 20) {
 				view.showQuest2Button();
-				calledQ2 = true;
+				quest2ButtonActive = true;
 			}		
 		}
 	}

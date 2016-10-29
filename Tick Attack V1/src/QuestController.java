@@ -3,10 +3,15 @@ public class QuestController {
 	private GameModel gameModel;
 	private QuestView quest1View;
 	private QuestView quest2View;
+	private QuestDecisionPoint quest1Model;
+	private QuestDecisionPoint quest2Model;
 	
 	public QuestController() {
 		quest1View = new QuestView();
 		quest2View = new QuestView();
+		quest1Model = new QuestDecisionPoint();
+		quest2Model = new QuestDecisionPoint();
+		
 	}
 	
 	public QuestView getFirstQuestView() {

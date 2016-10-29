@@ -8,7 +8,7 @@ import javax.swing.*;
 
 public class GameView extends JFrame implements IGameView{
 	
-	private boolean hasStarted = false;
+	private boolean hasStarted = false; //this should actually go with the game
 	private JPanel panel;
 	private JLabel health;
 	private JLabel streetCred;
@@ -22,9 +22,9 @@ public class GameView extends JFrame implements IGameView{
 	
 	private DefaultListModel<String> inventoryLM;
 	
-	public GameView(String title)  {
+	public GameView(String title, QuestController qc)  {
 		
-		 questController = new QuestController();
+		 questController = qc;
 		 quest1View = questController.getFirstQuestView();
 		 quest2View = questController.getSecondQuestView();
 		
@@ -75,7 +75,7 @@ public class GameView extends JFrame implements IGameView{
 		panel.updateUI();
 	}
 	
-	public boolean hasStarted() {
+	public boolean hasStarted() { //this should go with the game
 		return hasStarted;
 	}
 	
@@ -132,7 +132,7 @@ public class GameView extends JFrame implements IGameView{
 		quest1Button.add(label);
 		quest1Button.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				quest1View.displayText("Tree planting quest");
+				quest1View.initialize("Tree planting quest");
 				removeFromView(quest1Button);
 			}
 			});
@@ -152,7 +152,7 @@ public class GameView extends JFrame implements IGameView{
 		quest2Button.add(label);
 		quest2Button.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				quest2View.displayText("Antibiotic smuggling quest");
+				quest2View.initialize("Antibiotic smuggling quest");
 				removeFromView(quest2Button);
 			}
 			});
