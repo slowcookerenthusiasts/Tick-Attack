@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.TimerTask;
 
-public class Player extends TimerTask {
+public class Player extends TimerTask implements Agent {
 	
 	private int streetCred;
 	private int health;
@@ -25,7 +25,7 @@ public class Player extends TimerTask {
 		return inventory;
 	}
 	
-	public void run() {
+	public void run() { //needed for timetask
 		increaseStreetCred();
 	}
 	

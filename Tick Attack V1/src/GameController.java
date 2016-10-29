@@ -30,8 +30,10 @@ public class GameController{
 	public void run() {
 		view.showStartButton();
 		Player player = gameModel.getPlayer();
+		if (view.hasStarted()){
 		Timer t = new Timer();
 		t.schedule(player, 0, 1000);
+		}
 		view.showHealth(player.getHealth());
 		view.showInventory(player.getInventory());
 		boolean calledQ1 = false;
