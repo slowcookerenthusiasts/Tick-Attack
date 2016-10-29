@@ -1,17 +1,19 @@
 import java.util.Timer;
-import java.util.TimerTask;
-
 
 public class GameController{
 
 	private GameView view;
 	private QuestController questController;
 	private GameModel gameModel;
+	private Player player;
+	boolean calledQ1 = false;
+	boolean calledQ2 = false;
 
 	public GameController(GameView gView, QuestController qController, GameModel gModel) {
 		view = gView;
 		questController = qController;
 		gameModel = gModel;
+		player = gameModel.getPlayer();
 	}
 
 	public void createQuest() {
@@ -27,26 +29,37 @@ public class GameController{
 		return true;
 	}
 
-	public void run() {
+	public void runGame() {
+		initializeGame();	
+		while(true) {
+			updateStreetCred();
+			unlockQuest(calledQ1, 10);
+			unlockQuest(calledQ2, 20);
+		}
+	}
+	
+	private void unlockQuest(boolean hasBeenCalled, int minStreetCred) {
+		if ((player.getStreetCred() == minStreetCred) && (hasBeenCalled == false) && (view.hasStarted())) {
+			if (minStreetCred == 10) {
+				view.showQuest1Button();
+				calledQ1 = true;
+			} else if (minStreetCred == 20) {
+				view.showQuest2Button();
+				calledQ2 = true;
+			}		
+		}
+	}
+	
+	private void updateStreetCred() {
+		view.showStreetCred(player.getStreetCred());
+	}
+	
+	private void initializeGame() {
 		view.showStartButton();
-		Player player = gameModel.getPlayer();
 		Timer t = new Timer();
 		t.schedule(player, 0, 1000);
 		view.showHealth(player.getHealth());
 		view.showInventory(player.getInventory());
-		boolean calledQ1 = false;
-		boolean calledQ2 = false;
-		
-		while(true) {
-			view.showStreetCred(player.getStreetCred());
-			if((player.getStreetCred() == 10) && (calledQ1 == false) && (view.hasStarted())) {
-				view.showQuest1Button();
-				calledQ1 = true;
-			} else if ((player.getStreetCred() == 20) && (calledQ2 == false) && (view.hasStarted())) {
-				view.showQuest2Button();
-				calledQ2 = true;
-			}
-		}
 	}
 
 	public void runQuest() {

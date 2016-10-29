@@ -9,7 +9,7 @@ public class GameMain {
 		GameView view = new GameView("test");
 		QuestController qController = new QuestController();
 		GameController controller = new GameController(view, qController, model);
-		controller.run();
+		controller.runGame();
 
 	}
 
