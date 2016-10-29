@@ -1,4 +1,4 @@
-public interface Agent {
+public interface Agent {	
 	
 	//Mac Test Comment
 	public int getHealth();

@@ -10,8 +10,11 @@ public class QuestController {
 		quest1View = new QuestView();
 		quest2View = new QuestView();
 		quest1Model = new QuestDecisionPoint();
-		quest2Model = new QuestDecisionPoint();
-		
+		quest2Model = new QuestDecisionPoint();	
+	}
+	
+	public void initializeQuestView(QuestView view, String title) {
+		view.initialize(title);
 	}
 	
 	public QuestView getFirstQuestView() {

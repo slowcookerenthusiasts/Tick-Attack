@@ -1,7 +1,6 @@
 import java.awt.Component;
 import java.util.ArrayList;
 
-
 public interface IGameView {
 	
 	public void removeFromView(Component c);
