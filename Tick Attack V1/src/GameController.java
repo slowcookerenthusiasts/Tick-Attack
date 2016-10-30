@@ -12,7 +12,7 @@ public class GameController{
 
 	public GameController(GameView gView, QuestController qController, GameModel gModel) {
 		view = gView;
-		//questController = qController;
+		view.setGameController(this);
 		gameModel = gModel;
 		player = gameModel.getPlayer();
 	}
