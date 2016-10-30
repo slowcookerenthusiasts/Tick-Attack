@@ -18,13 +18,15 @@ public class GameView extends JFrame implements IGameView{
 	private QuestView quest1View;
 	private QuestView quest2View;
 	private JButton startButton;
-	private GameController gameController;
+	private QuestController questController;
 	
 	private DefaultListModel<String> inventoryLM;
 	
-	public GameView()  {
-		 quest1View = new QuestView();
-		 quest2View = new QuestView();
+	public GameView(String title, QuestController qc)  {
+		
+		 questController = qc;
+		 quest1View = questController.getFirstQuestView();
+		 quest2View = questController.getSecondQuestView();
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		panel = (JPanel) getContentPane();
@@ -35,14 +37,11 @@ public class GameView extends JFrame implements IGameView{
 		streetCred = makeStreetCredLabel();
 		health = makeHealthLabel();
 		inventory = makeInventoryList();
-			
+		
+		
 		pack();
 		setSize(400,400);
 		setVisible(true);
-	}
-
-	public void setGameController(GameController gc) {
-		gameController = gc;
 	}
 	
 	public void showStartButton() {
@@ -104,6 +103,8 @@ public class GameView extends JFrame implements IGameView{
 	
 	public JScrollPane makeInventoryList() {
 		inventoryLM = new DefaultListModel<String>();
+		JLabel title = new JLabel();
+		title.setText("Inventory");
 		JList<String> inventoryList = new JList<String>(inventoryLM);
 		inventoryList.setVisibleRowCount(10);
 		inventoryLM.addElement("Inventory:");
@@ -131,7 +132,7 @@ public class GameView extends JFrame implements IGameView{
 		quest1Button.add(label);
 		quest1Button.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				gameController.runQuest("Tree planting quest", quest1View);
+				quest1View.initialize("Tree planting quest");
 				removeFromView(quest1Button);
 			}
 			});
@@ -151,7 +152,7 @@ public class GameView extends JFrame implements IGameView{
 		quest2Button.add(label);
 		quest2Button.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				gameController.runQuest("Antibiotic smuggling quest",quest2View);
+				quest2View.initialize("Antibiotic smuggling quest");
 				removeFromView(quest2Button);
 			}
 			});
