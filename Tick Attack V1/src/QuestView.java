@@ -59,6 +59,11 @@ public class QuestView extends JFrame{
 		panel.updateUI();	
 	}
 	
+	public void displayOutcome(String inputText) {
+		questTextLM.addElement(inputText);
+		panel.updateUI();
+	}
+	
 	private JButton makeNextButton() {
 		JButton nextButton = new JButton();
 		JLabel label = new JLabel("Next...");
@@ -107,6 +112,7 @@ public class QuestView extends JFrame{
 				yesButtonClicked = ButtonOptions.TRUE;
 				noButtonClicked = ButtonOptions.FALSE;
 				panel.remove(choiceButtons);
+				questController.progressQuest();
 				panel.updateUI();
 			}
 			});
@@ -125,6 +131,7 @@ public class QuestView extends JFrame{
 				yesButtonClicked = ButtonOptions.FALSE;
 				noButtonClicked = ButtonOptions.TRUE;
 				panel.remove(choiceButtons);
+				questController.progressQuest();
 				panel.updateUI();
 			}
 			});
@@ -135,12 +142,8 @@ public class QuestView extends JFrame{
 	public boolean getChoice() {	
 		if (noButtonClicked == ButtonOptions.TRUE) {
 			return false;
-		} else if (yesButtonClicked == ButtonOptions.TRUE) {
-			return true;
 		} else {
-			return false;
-		}
-		
+			return true;	
 	}
-
+	}
 }

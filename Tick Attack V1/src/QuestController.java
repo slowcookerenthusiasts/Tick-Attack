@@ -11,6 +11,7 @@ public class QuestController{
 		view = newView;
 		activeNode = gameModel.getActiveQuest();
 		view.displayText(activeNode.getDecisionText());
+		activeNode = activeNode.generateChild();
 	}
 	
 //-----------------------------------------------------------------------------------------	
@@ -26,6 +27,9 @@ public class QuestController{
 	public void progressQuest() {
 		if (activeNode.hasChildren()) {
 			view.displayText(activeNode.getDecisionText());
+		} else {
+			view.displayOutcome(activeNode.getDecisionText());
+			return;
 		}
 		if (activeNode.getPlayerDecisionNeeded()){
 			view.promptChoice();
