@@ -1,11 +1,16 @@
-public class QuestController {
+import java.util.TimerTask;
+
+public class QuestController{
 
 	private GameModel gameModel;
 	private QuestView view;
+	private QuestDecisionPoint activeNode;
 	
 	public QuestController(GameModel model, QuestView newView ) {
 		gameModel = model;
 		view = newView;
+		activeNode = gameModel.getActiveQuest();
+		view.displayText(activeNode.getDecisionText());
 	}
 	
 //-----------------------------------------------------------------------------------------	
@@ -13,28 +18,35 @@ public class QuestController {
 	public void initializeQuestView(QuestView view, String title) {
 		view.initialize(title);
 	}
+	
+	public void test() {
+		System.out.println("Yo!");
+	}
+	
+	public void progressQuest() {
+		if (activeNode.hasChildren()) {
+			view.displayText(activeNode.getDecisionText());
+		}
+		if (activeNode.getPlayerDecisionNeeded()){
+			view.promptChoice();
+			boolean choice = view.getChoice();
+			QuestDecisionPoint child = activeNode.getChosenChild(choice);
+			activeNode = child;
+		}//if
+		else{
+			QuestDecisionPoint child = activeNode.generateChild();
+			activeNode = child;
+		}//else
+	}
 
 //-----------------------------------------------------------------------------------------
 
-	
-//	public void readQuestModel() {
-//		for (int i = 0; i < 20; i++) {
-//			if (i%2 ==0) {
-//				view.displayText("Hi! I am testing the view! freyhfjrenkjieuhrgngjenjngrijehgunrguhnen");
-//			} else {
-//				view.displayText("Yo!!!! This is sick!! whuvdhgbeyvftwvghbfuerhbfehrfrnefunbbruuebfrnufe");
-//			}
-//		}
-//
-//	}
-	
-	//commented this out just for testing purposes
-	
 	public void readQuestModel() {
 		QuestDecisionPoint activeNode = gameModel.getActiveQuest();
 		while(activeNode.hasChildren()){
-			view.displayText(activeNode.getDecisionText());
-			if(activeNode.getPlayerDecisionNeeded()){
+				view.displayText(activeNode.getDecisionText());
+			if (activeNode.getPlayerDecisionNeeded()){
+				view.promptChoice();
 				boolean choice = view.getChoice();
 				QuestDecisionPoint child = activeNode.getChosenChild(choice);
 				activeNode = child;
@@ -45,6 +57,7 @@ public class QuestController {
 			}//else
 		}//while
 	}
+	
 	
 //-----------------------------------------------------------------------------------------	
 /**

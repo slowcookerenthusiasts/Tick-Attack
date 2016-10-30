@@ -34,6 +34,7 @@ public class GameController{
 		initializeGame();	
 		while(true) {
 			updateStreetCred();
+			view.showHealth(player.getHealth());
 			unlockQuest(quest1ButtonActive, 10);
 			unlockQuest(quest2ButtonActive, 20);
 		}
@@ -59,17 +60,19 @@ public class GameController{
 		view.showStartButton();
 		Timer t = new Timer();
 		t.schedule(player, 0, 1000);
-		view.showHealth(player.getHealth());
 		view.showInventory(player.getInventory());
 	}
 
 	public void runQuest(String title, QuestView view) {
 		if (title.equals("Tree planting quest")) {
 			fillTreeplantingQuest();
+		} else if (title.equals("Antibiotic smuggling quest")) {
+			
 		}
 		view.initialize(title);
 		QuestController controller = new QuestController(gameModel, view);
-		controller.readQuestModel();
+		view.setQC(controller);
+		//controller.readQuestModel();
 	}//runQuest() method
 
 //-----------------------------------------------------------------------------------------	

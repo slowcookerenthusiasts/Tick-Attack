@@ -16,6 +16,9 @@ public class QuestView extends JFrame{
 	private DefaultListModel<String> questTextLM;
 	private ButtonOptions yesButtonClicked = ButtonOptions.NONE;
 	private ButtonOptions noButtonClicked = ButtonOptions.NONE;
+	private JPanel choiceButtons = new JPanel();
+	private QuestController questController;
+	
 	
 	public void initialize(String questTitle) {
 		panel = (JPanel) getContentPane();
@@ -32,6 +35,10 @@ public class QuestView extends JFrame{
 		panel.add(questText);
 		panel.add(makeExitButton());
 		panel.updateUI();
+	}
+	
+	public void setQC(QuestController qCont) {
+		questController = qCont;
 	}
 	
 	public enum ButtonOptions {
@@ -60,7 +67,9 @@ public class QuestView extends JFrame{
 		nextButton.add(label);
 		nextButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				
+				panel.remove(nextButton);
+				questController.progressQuest();
+				panel.updateUI();
 			}
 			});
 		return nextButton;
@@ -81,14 +90,15 @@ public class QuestView extends JFrame{
 	}
 	
 	public void promptChoice() {
-		panel.add(makeYesButton());
-		panel.add(makeNoButton());
+		choiceButtons.add(makeYesButton());
+		choiceButtons.add(makeNoButton());
+		panel.add(choiceButtons);
 		panel.updateUI();
 	}
 	
 	private JButton makeYesButton() {
 		JButton yesButton = new JButton();
-		JLabel label = new JLabel("YES");
+		JLabel label = new JLabel("Yes");
 		label.setHorizontalAlignment(JButton.CENTER);
 		label.setVerticalAlignment(JButton.CENTER);
 		yesButton.add(label);
@@ -96,6 +106,8 @@ public class QuestView extends JFrame{
 			public void mouseClicked(MouseEvent e) {
 				yesButtonClicked = ButtonOptions.TRUE;
 				noButtonClicked = ButtonOptions.FALSE;
+				panel.remove(choiceButtons);
+				panel.updateUI();
 			}
 			});
 		return yesButton;
@@ -104,7 +116,7 @@ public class QuestView extends JFrame{
 	
 	private JButton makeNoButton() {
 		JButton noButton = new JButton();
-		JLabel label = new JLabel("YES");
+		JLabel label = new JLabel("No");
 		label.setHorizontalAlignment(JButton.CENTER);
 		label.setVerticalAlignment(JButton.CENTER);
 		noButton.add(label);
@@ -112,6 +124,8 @@ public class QuestView extends JFrame{
 			public void mouseClicked(MouseEvent e) {
 				yesButtonClicked = ButtonOptions.FALSE;
 				noButtonClicked = ButtonOptions.TRUE;
+				panel.remove(choiceButtons);
+				panel.updateUI();
 			}
 			});
 		return noButton;
