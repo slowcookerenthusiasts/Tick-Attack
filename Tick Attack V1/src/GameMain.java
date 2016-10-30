@@ -7,8 +7,7 @@ public class GameMain {
 		
 		GameModel model = new GameModel(player);
 		GameView view = new GameView();
-		QuestController qController = new QuestController(model, null);
-		GameController controller = new GameController(view,qController, model);
+		GameController controller = new GameController(view, model);
 		
 		controller.runGame();
 	}

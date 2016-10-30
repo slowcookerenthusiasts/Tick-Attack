@@ -10,7 +10,7 @@ public class GameController{
 	boolean quest1ButtonActive = false;
 	boolean quest2ButtonActive = false;
 
-	public GameController(GameView gView, QuestController qController, GameModel gModel) {
+	public GameController(GameView gView, GameModel gModel) {
 		view = gView;
 		view.setGameController(this);
 		gameModel = gModel;
@@ -64,6 +64,9 @@ public class GameController{
 	}
 
 	public void runQuest(String title, QuestView view) {
+		if (title.equals("Tree planting quest")) {
+			fillTreeplantingQuest();
+		}
 		view.initialize(title);
 		QuestController controller = new QuestController(gameModel, view);
 		controller.readQuestModel();
@@ -71,7 +74,7 @@ public class GameController{
 
 //-----------------------------------------------------------------------------------------	
 
-	public void fillTreeplantingQuest() throws CloneNotSupportedException{
+	public void fillTreeplantingQuest(){
 		QuestDecisionPoint firstHour = new QuestDecisionPoint(false,false,"A bright new day begins! Time to start planting Trees!");
 		QuestDecisionPoint standardHour = new QuestDecisionPoint(false,false,"Another gruelling hour passes, at least it isn't raining.");
 		QuestDecisionPoint rainyHour = new QuestDecisionPoint(false,false,"It's raining");
@@ -80,10 +83,10 @@ public class GameController{
 		QuestDecisionPoint activeAddition = firstHour;
 		QuestDecisionPoint testAddition = firstHour;
 		for(int i=0; i<7; i++){
-			testAddition.addChild((QuestDecisionPoint)standardHour.clone(), 80);
-			testAddition.addChild((QuestDecisionPoint)rainyHour.clone(), 30);
-			testAddition.addChild((QuestDecisionPoint)turkeyAttack.clone(), 5);
-			testAddition.addChild((QuestDecisionPoint)cry.clone(), 10);
+			testAddition.addChild(standardHour, 80);
+			testAddition.addChild(rainyHour, 30);
+			testAddition.addChild(turkeyAttack, 5);
+			testAddition.addChild(cry, 10);
 			QuestDecisionPoint newPoint = testAddition.generateChild();
 			activeAddition.addChild(newPoint, 100);
 			activeAddition = newPoint;
@@ -99,6 +102,7 @@ public class GameController{
 		dayOver.addChild(noCheck, 100);
 		activeAddition.addChild(dayOver, 100);
 		gameModel.addQuest(firstHour);
+		gameModel.setActiveQuest(firstHour);
 	}//fillTreePlantingQuest() method
 	
 	
