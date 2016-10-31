@@ -39,7 +39,7 @@ public class GameController{
 	 * @return a boolean, indicating whether the game is over or not.
 	 */
 	public boolean isOver() {
-		if (gameModel.getPlayer().getStreetCred() <=0){
+		if (gameModel.getPlayer().getHealth() <=0){
 		return true;
 		} else {
 			return false;
@@ -59,6 +59,10 @@ public class GameController{
 			unlockQuest(quest1ButtonActive, 10);
 			unlockQuest(quest2ButtonActive, 20);
 		}
+		
+		player.setHealth(0);
+		view.showHealth(player.getHealth());
+		return;
 	}
 	
 	/**

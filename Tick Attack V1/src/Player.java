@@ -18,6 +18,14 @@ public class Player extends TimerTask implements Agent {
 	}
 	
 	/**
+	 * Setter, will set the player's health
+	 * @param value is an integer indicating the new health
+	 */
+	public void setHealth(int value) {
+		health = value;
+	}
+	
+	/**
 	 * This method will add items to the player's inventory.
 	 * @param item is an Item object
 	 */
