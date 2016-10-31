@@ -62,6 +62,12 @@ public class GameController{
 		
 		player.setHealth(0);
 		view.showHealth(player.getHealth());
+		try {
+			view.removeFromView(view.getQuest1Button());
+			view.removeFromView(view.getQuest2Button());
+		} catch (Exception e) {
+			
+		}
 		return;
 	}
 	

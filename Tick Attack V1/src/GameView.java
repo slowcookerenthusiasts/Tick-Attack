@@ -52,6 +52,20 @@ public class GameView extends JFrame implements IGameView{
 	}
 	
 	/**
+	 * Getter for quest 1 button
+	 */
+	public JButton getQuest1Button() {
+		return quest1Button;
+	}
+	
+	/**
+	 * Getter for quest 1 button
+	 */
+	public JButton getQuest2Button() {
+		return quest2Button;
+	}
+	
+	/**
 	 * This method will add the startButton to the view and update it.
 	 */
 	public void showStartButton() {
