@@ -28,13 +28,11 @@ public class QuestController{
 			view.displayTextAndButton(activeNode.getDecisionText());
 			QuestDecisionPoint child = activeNode.generateChild();
 			activeNode = child;
-			return;
 		} else if (!activeNode.hasChildren() && (!activeNode.getPlayerDecisionNeeded())) {
 			view.displayJustText(activeNode.getDecisionText());
-			return;
 		}
 		
-		if (activeNode.getPlayerDecisionNeeded()){
+		else{
 			view.displayJustText(activeNode.getDecisionText());
 			view.promptChoice();
 		}
