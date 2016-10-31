@@ -21,6 +21,11 @@ public class GameView extends JFrame implements IGameView{
 	
 	private DefaultListModel<String> inventoryLM;
 	
+	/**
+	 * Constructor, the view is initialized to make a start button, streetCred label,
+	 * health label, and inventory list
+	 */
+	
 	public GameView()  {
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -38,15 +43,27 @@ public class GameView extends JFrame implements IGameView{
 		setVisible(true);
 	}
 
+	/**
+	 * Setter, will set the view's game controller to be
+	 * @param gc
+	 */
 	public void setGameController(GameController gc) {
 		gameController = gc;
 	}
 	
+	/**
+	 * This method will add the startButton to the view and update it.
+	 */
 	public void showStartButton() {
 		panel.add(startButton);
 		panel.updateUI();
 	}
 	
+	/**
+	 * This method will create a start button. If clicked, the button will disappear, showing
+	 * the player's health, street cred, and inventory.
+	 * @return a JButton, which is a start button
+	 */
 	private JButton makeStartButton() {
 		JButton startButton = new JButton();
 		JLabel startText = new JLabel();
@@ -68,43 +85,66 @@ public class GameView extends JFrame implements IGameView{
 			}); 
 		return startButton;
 	}
+	
+	/**
+	 * This method will remove a component from the view - as required by the IGameView interface
+	 */
 	public void removeFromView(Component c) {
 		panel.remove(c);
 		panel.updateUI();
 	}
 	
-	
+	/**
+	 * This method will make a street cred label
+	 * @return the label created (as a JLabel)
+	 */
 	private JLabel makeStreetCredLabel() {
-		JLabel streetCredLabel = new JLabel();
-		streetCredLabel.setText("Current street cred: ");
+		JLabel streetCredLabel = new JLabel("Current street cred: ");
 		return streetCredLabel;
 	}
 	
+	/**
+	 * This method will make a health label
+	 * @return a JLabel indicating the player's health
+	 */
 	private JLabel makeHealthLabel() {
-		JLabel healthLabel = new JLabel();
-		healthLabel.setText("Current health points: ");
+		JLabel healthLabel = new JLabel("Current health points: ");
 		return healthLabel;
 	}
 	
+	/**
+	 * This method will display the player's health through the use of the health label created
+	 * Required by IGameView.
+	 */
 	public void showHealth(int value) {
 		health.setText("Current health points: " + value + "\n");	
 		panel.updateUI();
 	}
 	
+	/**
+	 * This method will display the player's street cred through the use of the street cred label created
+	 * Required by IGameView.
+	 */
 	public void showStreetCred(int value) {
 		streetCred.setText("Current street cred: " + value + "\n");
 		panel.updateUI();
 	}
 	
+	/**
+	 * This method will create a JScrollPane that shows the player's inventory items.
+	 * @return a JScrollPane to be used to show inventory
+	 */
 	public JScrollPane makeInventoryList() {
 		inventoryLM = new DefaultListModel<String>();
 		JList<String> inventoryList = new JList<String>(inventoryLM);
 		inventoryList.setVisibleRowCount(10);
 		inventoryLM.addElement("Inventory:");
-		
 		return new JScrollPane(inventoryList);
 	}
 	
+	/**
+	 * This method is used to show the player's inventory items - as required by IGameView
+	 */
 	public void showInventory(ArrayList<Item> list) {
 		for (int i = 0; i < list.size(); i++) {
 			inventoryLM.addElement(list.get(i).getName());
@@ -112,12 +152,20 @@ public class GameView extends JFrame implements IGameView{
 		panel.updateUI();
 	}
 	
+	/**
+	 * This method will create and add a button for the first quest and update the panel
+	 */
 	public void showQuest1Button() {
 		panel.add(makeQuest1Button());
 		gameController.setQuest1ButtonActive(true);
 		panel.updateUI();
 	}
 	
+	/**
+	 * This method will create a button for the first quest. Clicking the button will
+	 * tell the game controller to start the quest, and remove the button from the view.
+	 * @return a JButton that is used to start a quest
+	 */
 	public JButton makeQuest1Button() {
 		quest1View = new QuestView();
 		quest1Button = new JButton();
@@ -135,12 +183,20 @@ public class GameView extends JFrame implements IGameView{
 		return quest1Button;
 	}
 	
+	/**
+	 * This method will create and add a button for the second quest and update the panel
+	 */
 	public void showQuest2Button() {
 		panel.add(makeQuest2Button());
 		gameController.setQuest1ButtonActive(true);
 		panel.updateUI();
 	}
 	
+	/**
+	 * This method will create a button for the second quest. Clicking the button will
+	 * tell the game controller to start the quest, and remove the button from the view.
+	 * @return a JButton that is used to start a quest
+	 */
 	public JButton makeQuest2Button() {
 		quest2View = new QuestView();
 		quest2Button = new JButton();

@@ -3,7 +3,7 @@ public class GameMain {
 	public static void main(String[] args) {
 		Player player = new Player();
 		player.addToInventory(new Item("Cellphone", 0));
-		player.addToInventory(new Item("Lipstick", 0));
+		player.addToInventory(new Item("Piece of gum", 0));
 		
 		GameModel model = new GameModel(player);
 		GameView view = new GameView();
