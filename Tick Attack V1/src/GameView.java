@@ -8,7 +8,6 @@ import javax.swing.*;
 
 public class GameView extends JFrame implements IGameView{
 	
-	private boolean hasStarted = false; //this should actually go with the game
 	private JPanel panel;
 	private JLabel health;
 	private JLabel streetCred;
@@ -23,8 +22,6 @@ public class GameView extends JFrame implements IGameView{
 	private DefaultListModel<String> inventoryLM;
 	
 	public GameView()  {
-		 quest1View = new QuestView();
-		 quest2View = new QuestView();
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		panel = (JPanel) getContentPane();
@@ -61,7 +58,7 @@ public class GameView extends JFrame implements IGameView{
 		
 		startButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				hasStarted = true;
+				gameController.changeStartState(true);
 				removeFromView(startButton);
 				panel.add(health);
 				panel.add(streetCred);
@@ -76,9 +73,6 @@ public class GameView extends JFrame implements IGameView{
 		panel.updateUI();
 	}
 	
-	public boolean hasStarted() { //this should go with the game
-		return hasStarted;
-	}
 	
 	private JLabel makeStreetCredLabel() {
 		JLabel streetCredLabel = new JLabel();
@@ -120,10 +114,12 @@ public class GameView extends JFrame implements IGameView{
 	
 	public void showQuest1Button() {
 		panel.add(makeQuest1Button());
+		gameController.setQuest1ButtonActive(true);
 		panel.updateUI();
 	}
 	
 	public JButton makeQuest1Button() {
+		quest1View = new QuestView();
 		quest1Button = new JButton();
 		JLabel label = new JLabel("Start tree planting quest");
 		label.setHorizontalAlignment(JButton.CENTER);
@@ -132,6 +128,7 @@ public class GameView extends JFrame implements IGameView{
 		quest1Button.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				gameController.runQuest("Tree planting quest", quest1View);
+				gameController.setQuest1ButtonActive(false);
 				removeFromView(quest1Button);
 			}
 			});
@@ -140,10 +137,12 @@ public class GameView extends JFrame implements IGameView{
 	
 	public void showQuest2Button() {
 		panel.add(makeQuest2Button());
+		gameController.setQuest1ButtonActive(true);
 		panel.updateUI();
 	}
 	
 	public JButton makeQuest2Button() {
+		quest2View = new QuestView();
 		quest2Button = new JButton();
 		JLabel label = new JLabel("Start antibiotic smuggling quest");
 		label.setHorizontalAlignment(JButton.CENTER);
@@ -152,6 +151,7 @@ public class GameView extends JFrame implements IGameView{
 		quest2Button.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				gameController.runQuest("Antibiotic smuggling quest",quest2View);
+				gameController.setQuest2ButtonActive(false);
 				removeFromView(quest2Button);
 			}
 			});

@@ -85,6 +85,7 @@ public class QuestView extends JFrame{
 		exitButton.add(label);
 		exitButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
+				panel.removeAll();
 				dispose();
 			}
 			});

@@ -4,7 +4,7 @@ public class QuestController{
 	private QuestView view;
 	private QuestDecisionPoint activeNode;
 	
-	public QuestController(GameModel model, QuestView newView ) {
+	public QuestController(GameModel model, QuestView newView) {
 		gameModel = model;
 		view = newView;
 		activeNode = gameModel.getActiveQuest();
@@ -21,6 +21,7 @@ public class QuestController{
 	public void makeDecision(boolean update) {
 		QuestDecisionPoint child = activeNode.getChosenChild(update);
 		activeNode = child;
+		updateModel();
 	}
 	
 	public void progressQuest() {
@@ -30,11 +31,19 @@ public class QuestController{
 			activeNode = child;
 		} else if (!activeNode.hasChildren() && (!activeNode.getPlayerDecisionNeeded())) {
 			view.displayJustText(activeNode.getDecisionText());
-		}
-		
-		else{
+		} else{
 			view.displayJustText(activeNode.getDecisionText());
 			view.promptChoice();
+		}
+		
+		updateModel();
+	}
+	
+	public void updateModel() {
+		if (activeNode.getHasHealthEffect()) {
+			gameModel.getPlayer().increaseHealthBy(activeNode.getHealthEffect());
+		} if (activeNode.getHasSCEffect()) {
+			gameModel.getPlayer().increaseStreetCredBy(activeNode.getSCEffect());
 		}
 	}
 
