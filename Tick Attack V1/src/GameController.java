@@ -95,10 +95,10 @@ public class GameController{
 			activeAddition = newPoint;
 		}//for
 		QuestDecisionPoint dayOver = new QuestDecisionPoint(true,false,"The day is over! It's time to collect your well earned street cred! Would you like do perform a tick check?");
-		QuestDecisionPoint Check = new QuestDecisionPoint(false, true, "Good idea, tick check's help you avoid Lyme Disease!");
-		Check.setHealthEffect(1);
-		Check.setSCEffect(190);
-		dayOver.addChild(Check, 100);
+		QuestDecisionPoint check = new QuestDecisionPoint(false, true, "Good idea, tick check's help you avoid Lyme Disease!");
+		check.setHealthEffect(1);
+		check.setSCEffect(190);
+		dayOver.addChild(check, 100);
 		QuestDecisionPoint noCheck = new QuestDecisionPoint(false, true, "Bad idea, you might get Lyme disease!");
 		noCheck.setHealthEffect(-10);
 		noCheck.setSCEffect(200);

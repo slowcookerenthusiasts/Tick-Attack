@@ -14,8 +14,8 @@ public class QuestView extends JFrame{
 	private JPanel panel;
 	private JScrollPane questText;
 	private DefaultListModel<String> questTextLM;
-	private ButtonOptions yesButtonClicked = ButtonOptions.NONE;
-	private ButtonOptions noButtonClicked = ButtonOptions.NONE;
+	private boolean yesButtonClicked;
+	private boolean noButtonClicked;
 	private JPanel choiceButtons = new JPanel();
 	private QuestController questController;
 	
@@ -41,9 +41,6 @@ public class QuestView extends JFrame{
 		questController = qCont;
 	}
 	
-	public enum ButtonOptions {
-		TRUE, FALSE, NONE;
-	}
 	private JScrollPane makeQuestTextDisplay() {
 		questTextLM = new DefaultListModel<String>();
 		JList<String> questTextList = new JList<String>(questTextLM);
@@ -53,13 +50,13 @@ public class QuestView extends JFrame{
 		return new JScrollPane(questTextList);
 	}
 	
-	public void displayText(String inputText) {
+	public void displayTextAndButton(String inputText) {
 		questTextLM.addElement(inputText);
 		panel.add(makeNextButton());
 		panel.updateUI();	
 	}
 	
-	public void displayOutcome(String inputText) {
+	public void displayJustText(String inputText) {
 		questTextLM.addElement(inputText);
 		panel.updateUI();
 	}
@@ -109,8 +106,7 @@ public class QuestView extends JFrame{
 		yesButton.add(label);
 		yesButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				yesButtonClicked = ButtonOptions.TRUE;
-				noButtonClicked = ButtonOptions.FALSE;
+				questController.makeDecision(true);
 				panel.remove(choiceButtons);
 				questController.progressQuest();
 				panel.updateUI();
@@ -128,8 +124,7 @@ public class QuestView extends JFrame{
 		noButton.add(label);
 		noButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				yesButtonClicked = ButtonOptions.FALSE;
-				noButtonClicked = ButtonOptions.TRUE;
+				questController.makeDecision(false);
 				panel.remove(choiceButtons);
 				questController.progressQuest();
 				panel.updateUI();
@@ -137,13 +132,5 @@ public class QuestView extends JFrame{
 			});
 		return noButton;
 		
-	}
-	
-	public boolean getChoice() {	
-		if (noButtonClicked == ButtonOptions.TRUE) {
-			return false;
-		} else {
-			return true;	
-	}
 	}
 }

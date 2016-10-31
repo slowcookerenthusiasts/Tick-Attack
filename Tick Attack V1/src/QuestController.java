@@ -1,5 +1,3 @@
-import java.util.TimerTask;
-
 public class QuestController{
 
 	private GameModel gameModel;
@@ -10,7 +8,7 @@ public class QuestController{
 		gameModel = model;
 		view = newView;
 		activeNode = gameModel.getActiveQuest();
-		view.displayText(activeNode.getDecisionText());
+		view.displayTextAndButton(activeNode.getDecisionText());
 		activeNode = activeNode.generateChild();
 	}
 	
@@ -20,48 +18,28 @@ public class QuestController{
 		view.initialize(title);
 	}
 	
-	public void test() {
-		System.out.println("Yo!");
+	public void makeDecision(boolean update) {
+		QuestDecisionPoint child = activeNode.getChosenChild(update);
+		activeNode = child;
 	}
 	
 	public void progressQuest() {
-		if (activeNode.hasChildren()) {
-			view.displayText(activeNode.getDecisionText());
-		} else {
-			view.displayOutcome(activeNode.getDecisionText());
-			return;
-		}
-		if (activeNode.getPlayerDecisionNeeded()){
-			view.promptChoice();
-			boolean choice = view.getChoice();
-			QuestDecisionPoint child = activeNode.getChosenChild(choice);
-			activeNode = child;
-		}//if
-		else{
+		if (activeNode.hasChildren() && (!activeNode.getPlayerDecisionNeeded())) {
+			view.displayTextAndButton(activeNode.getDecisionText());
 			QuestDecisionPoint child = activeNode.generateChild();
 			activeNode = child;
-		}//else
+			return;
+		} else if (!activeNode.hasChildren() && (!activeNode.getPlayerDecisionNeeded())) {
+			view.displayJustText(activeNode.getDecisionText());
+			return;
+		}
+		
+		if (activeNode.getPlayerDecisionNeeded()){
+			view.displayJustText(activeNode.getDecisionText());
+			view.promptChoice();
+		}
 	}
 
-//-----------------------------------------------------------------------------------------
-
-	public void readQuestModel() {
-		QuestDecisionPoint activeNode = gameModel.getActiveQuest();
-		while(activeNode.hasChildren()){
-				view.displayText(activeNode.getDecisionText());
-			if (activeNode.getPlayerDecisionNeeded()){
-				view.promptChoice();
-				boolean choice = view.getChoice();
-				QuestDecisionPoint child = activeNode.getChosenChild(choice);
-				activeNode = child;
-			}//if
-			else{
-				QuestDecisionPoint child = activeNode.generateChild();
-				activeNode = child;
-			}//else
-		}//while
-	}
-	
 	
 //-----------------------------------------------------------------------------------------	
 /**
