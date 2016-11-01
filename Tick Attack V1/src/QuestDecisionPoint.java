@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class QuestDecisionPoint implements Cloneable {
+public class QuestDecisionPoint {
 
 	private String defaultText;
 	private ArrayList<QuestDecisionPoint> children = new ArrayList<QuestDecisionPoint>();

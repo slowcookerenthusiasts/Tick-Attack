@@ -14,7 +14,7 @@ public class QuestView extends JFrame{
 	private JPanel panel; //the main view for the quest
 	private JScrollPane questText; //shows the events happening in the quest
 	private DefaultListModel<String> questTextLM;
-	private JPanel choiceButtons = new JPanel(); //needed for yes/no buttons
+	private JPanel choiceButtons; //needed for yes/no buttons
 	private QuestController questController;
 	
 	/**
@@ -140,6 +140,7 @@ public class QuestView extends JFrame{
 	 */
 	
 	public void promptChoice() {
+		choiceButtons = new JPanel();
 		choiceButtons.add(makeYesButton());
 		choiceButtons.add(makeNoButton());
 		panel.add(choiceButtons);
