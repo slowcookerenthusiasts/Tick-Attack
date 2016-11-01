@@ -122,10 +122,10 @@ public class GameController{
 	private void initializeGame() {
 		view.showStartButton();
 		Timer t = new Timer();
-		t.schedule(player, 0, 1000);
+		t.schedule(new PlayerSCIncreaser(player), 0, 1000);
 		
 		Timer healthT = new Timer();
-		healthT.schedule(new PlayerHealth(player), 0, 5000);
+		healthT.schedule(new PlayerHealthIncreaser(player), 0, 5000);
 		view.showInventory(player.getInventory());
 	}
 

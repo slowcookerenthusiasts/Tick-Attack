@@ -1,10 +1,9 @@
 import java.util.ArrayList;
 import java.util.TimerTask;
 
-public class Player extends TimerTask implements Agent {
+public class Player extends  Agent {
 	
 	private int streetCred;
-	private int health;
 	private ArrayList<Item> inventory;
 	
 	/**
@@ -51,13 +50,6 @@ public class Player extends TimerTask implements Agent {
 	}
 	
 	/**
-	 * This method will increase the player's street cred
-	 */
-	public void run() { //needed for timetask
-		increaseStreetCredBy(1);
-	}
-	
-	/**
 	 * This method will increase street cred by a value specified by the user.
 	 * @param value is an integer, indicating how much the player's street cred should increase by.
 	 */
@@ -82,28 +74,4 @@ public class Player extends TimerTask implements Agent {
 		return streetCred;
 	}
 	
-	/**
-	 * Getter, will
-	 * @return the player's health (as an integer)
-	 */
-	public int getHealth() {
-		return health;
-	}
-	
-	/**
-	 * This method will decrease health by a value specified by the user.
-	 * @param value is an integer, indicating how much the player's health should decrease by.
-	 */
-	public void decreaseHealthBy(int value) {
-		health = health - value;
-	}
-	
-	/**
-	 * This method will increase health by a value specified by the user.
-	 * @param value is an integer, indicating how much the player's health should increase by.
-	 */
-	public void increaseHealthBy(int value) {
-		health = health + value;
-	}
-
 }

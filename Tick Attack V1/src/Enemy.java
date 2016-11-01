@@ -1,6 +1,5 @@
-public class Enemy implements Agent{
+public class Enemy extends Agent{
 	
-	private int health;
 	private String enemyType;
 	
 	/**
@@ -11,29 +10,6 @@ public class Enemy implements Agent{
 		health = 100;
 		enemyType = enemyClassification;
 	}
-	
-	/**
-	 * Getter, returns health, as required by Agent
-	 */
-	public int getHealth() {
-		return health;
-	}
-
-	/**
-	 * Will decrease the enemy's health by a value specified by the user - as required by Agent
-	 */
-	public void decreaseHealthBy(int value) {
-		health = health - value;
-		
-	}
-
-	/**
-	 * Will increase the enemy's health by a value specified by the user - as required by Agent
-	 */
-	public void increaseHealthBy(int value) {
-		health = health + value;	
-	}
-	
 	/**
 	 * Getter, will
 	 * @return the enemy type

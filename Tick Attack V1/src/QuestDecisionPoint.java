@@ -90,7 +90,6 @@ public class QuestDecisionPoint implements Cloneable {
 	}
 
 	/**
-	 * getChosenChild() method
 	 * 
 	 * This method returns one of a nodes children in response to a player decision.
 	 * 
@@ -123,23 +122,24 @@ public class QuestDecisionPoint implements Cloneable {
 		if(!checkChildrenProbsExists()){
 			return null;
 		}
-
-		int weightTotal= 0;
+		int weightTotal= calculateWeightTotal();
+		
 		ArrayList<Double> childrenRelativeProbs = new ArrayList<Double>();
 		ArrayList<Double> childrenCumRelativeProbs = new ArrayList<Double>();
 
-		for(int i=0; i<childrenProbs.size(); i++){
-			weightTotal = weightTotal+childrenProbs.get(i);
-		}
-
-		for(int i=0; i<childrenProbs.size(); i++){
-			childrenRelativeProbs.add(i, (((double) childrenProbs.get(i))/((double)weightTotal)));
-		}
-		childrenCumRelativeProbs.add(0, childrenRelativeProbs.get(0));
-		for(int i=1; i<childrenProbs.size(); i++){
-			childrenCumRelativeProbs.add(i,childrenCumRelativeProbs.get(i-1)+childrenRelativeProbs.get(i));
-		}
-
+		childrenRelativeProbs = fillRelativeProbs(childrenRelativeProbs, weightTotal);
+		childrenCumRelativeProbs = fillCumRelativeProbs(childrenCumRelativeProbs, childrenRelativeProbs);
+		
+		return chooseRandomChild(childrenCumRelativeProbs);
+	}
+	
+	/**
+	 * A helper method, this method will choose a random child from an ArrayList of cumulative probabilities, with higher probabilities
+	 * indicating that the child is more likely to be chosen.
+	 * @param childrenCumRelativeProbs is an ArrayList of doubles, representing cumulative probabilities.
+	 * @return A QuestDecisionPoint, which is the child randomly chosen.
+	 */
+	private QuestDecisionPoint chooseRandomChild(ArrayList<Double> childrenCumRelativeProbs) {
 		Random generator = new Random();
 		double pick = generator.nextDouble();
 
@@ -149,6 +149,48 @@ public class QuestDecisionPoint implements Cloneable {
 			}
 		}
 		return null;
+	}
+	
+	/**
+	 * This method will fill an ArrayList with cumulative probabilities, based on relative probabilities
+	 * @param childrenCumRelativeProbs is the array list that is to be filled
+	 * @param childrenRelativeProbs is the array list of relative probabilities
+	 * @return A filled in ArrayList of doubles (indicating cumulative probabilities)
+	 */
+	private ArrayList<Double> fillCumRelativeProbs(ArrayList<Double> childrenCumRelativeProbs, ArrayList<Double> childrenRelativeProbs) {
+		childrenCumRelativeProbs.add(0, childrenRelativeProbs.get(0));
+		for(int i=1; i<childrenProbs.size(); i++){
+			childrenCumRelativeProbs.add(i,childrenCumRelativeProbs.get(i-1)+childrenRelativeProbs.get(i));
+		}
+		
+		return childrenCumRelativeProbs;
+	}
+	
+	/**
+	 * This method will fill an ArrayList with relative probabilities, based on a weight total.
+	 * @param childrenRelativeProbs is the array list to be filled
+	 * @param weightTotal is the weight total used to create relative probabilities
+	 * @return a filled array list of doubles, indicating relative probabilities.
+	 */
+	private ArrayList<Double> fillRelativeProbs(ArrayList<Double> childrenRelativeProbs, int weightTotal) {
+		for(int i=0; i<childrenProbs.size(); i++){
+			childrenRelativeProbs.add(i, (((double) childrenProbs.get(i))/((double)weightTotal)));
+		}
+		
+		return childrenRelativeProbs;
+	}
+	
+	/**
+	 * This method will calculate the weight total for a node's children
+	 * @return an integer specifying the total weight
+	 */
+	private int calculateWeightTotal() {
+		int weightTotal = 0;
+		for(int i=0; i<childrenProbs.size(); i++){
+			weightTotal = weightTotal+childrenProbs.get(i);
+		}
+		
+		return weightTotal;
 	}
 
 	/**

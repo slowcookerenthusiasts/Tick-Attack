@@ -1,5 +1,5 @@
 import java.util.TimerTask;
-public class PlayerHealth extends TimerTask{
+public class PlayerHealthIncreaser extends TimerTask{
 
 	Player activePlayer;
 	
@@ -7,7 +7,7 @@ public class PlayerHealth extends TimerTask{
 	 * Constructor, will take in a player.
 	 * @param player is a Player object, whose health is to be decreased.
 	 */
-	public PlayerHealth(Player player) {
+	public PlayerHealthIncreaser(Player player) {
 		activePlayer = player;
 	}
 	
