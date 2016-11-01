@@ -38,7 +38,7 @@ public class GameController{
 	 * @return a boolean, indicating whether the game is over or not.
 	 */
 	public boolean isOver() {
-		if (gameModel.getPlayer().getHealth() <=0){
+		if (player.getHealth() <=0){
 		return true;
 		} else {
 			return false;
@@ -156,7 +156,7 @@ public class GameController{
 	public void fillTreeplantingQuest(){
 		QuestDecisionPoint firstHour = new QuestDecisionPoint(false,false,"A bright new day begins! Time to start planting some trees!");
 		QuestDecisionPoint standardHour = new QuestDecisionPoint(false,false,"Another gruelling hour passes, at least it isn't raining...");
-		QuestDecisionPoint rainyHour = new QuestDecisionPoint(false,false,"...It's raining");
+		QuestDecisionPoint rainyHour = new QuestDecisionPoint(false,false,"...It's raining.");
 		QuestDecisionPoint turkeyAttack = new QuestDecisionPoint(false,false,"A wild turkey attacks! Run! Run as fast as you can!");
 		QuestDecisionPoint cry = new QuestDecisionPoint(false,false,"You sit down alone in the forest and cry for a while. :(");
 		QuestDecisionPoint activeAddition = firstHour;
@@ -175,7 +175,7 @@ public class GameController{
 		check.setHealthEffect(10);
 		check.setSCEffect(80);
 		dayOver.addChild(check, 100);
-		QuestDecisionPoint noCheck = new QuestDecisionPoint(false, true, "Bad idea, you might get Lyme disease!");
+		QuestDecisionPoint noCheck = new QuestDecisionPoint(false, true, "Bad idea, you might get Lyme Disease!");
 		noCheck.setHealthEffect(-30);
 		noCheck.setSCEffect(200);
 		dayOver.addChild(noCheck, 100);
@@ -197,16 +197,16 @@ public class GameController{
 		QuestDecisionPoint fourthPoint = new QuestDecisionPoint(false,false,"What a bright and beautiful day to smuggle some antibiotics!");
 		QuestDecisionPoint fifthPoint = new QuestDecisionPoint(false,false,"You have driven up to the border crossing, a border guard approaches your car...");
 		QuestDecisionPoint sixthPoint = new QuestDecisionPoint(true,false,"Would you like to try and distract the guard?");
-		QuestDecisionPoint sixthPointChildTrue = new QuestDecisionPoint(false,false,"The guard grows suspicious");
-		QuestDecisionPoint sixthPointChildFalse = new QuestDecisionPoint(false,false,"The guard smiles and let's you by, as you start to drive he glances over...");
+		QuestDecisionPoint sixthPointChildTrue = new QuestDecisionPoint(false,false,"The guard grows suspicious...");
+		QuestDecisionPoint sixthPointChildFalse = new QuestDecisionPoint(false,false,"The guard smiles and lets you by, as you start to drive he glances over...");
 		QuestDecisionPoint seventhPoint = new QuestDecisionPoint(false,false,"...The guard decides to search your car...");
-		QuestDecisionPoint caughtPoint = new QuestDecisionPoint(true,false,"Rats! You got caught, do you want to jump out of the car and make a run for it?");
+		QuestDecisionPoint caughtPoint = new QuestDecisionPoint(true,false,"Rats! You got caught!! Do you want to jump out of the car and make a run for it?");
 		QuestDecisionPoint caughtPointTrue1 = new QuestDecisionPoint(false,false,"You leap from the car and sprint towards the nearest Canadian tree line!");
-		QuestDecisionPoint caughtPointTrue2a = new QuestDecisionPoint(false,false,"You are immediately tackled and arrested.");
+		QuestDecisionPoint caughtPointTrue2a = new QuestDecisionPoint(false,false,"You are immediately tackled and arrested. :(");
 		QuestDecisionPoint caughtPointTrue2b = new QuestDecisionPoint(false,false,"Using your ninja skills you dodge and weave past Canadian border security and escape into the forest!");
-		QuestDecisionPoint caughtPointTrue2c = new QuestDecisionPoint(false,false,"A wild moose breaks from the forest scaring away the border security, you leap upon its back and ride it to safety!");
+		QuestDecisionPoint caughtPointTrue2c = new QuestDecisionPoint(false,false,"A wild moose breaks from the forest, scaring away the border security, you leap unto its back and ride it to safety!");
 		QuestDecisionPoint failurePoint = new QuestDecisionPoint(false,false,"You lost the antibiotics...let's hope no one dies as a result.");
-		QuestDecisionPoint victoryPoint = new QuestDecisionPoint(false,true,"Success you made it out with the antibiotics!");
+		QuestDecisionPoint victoryPoint = new QuestDecisionPoint(false,true,"Success!!! You made it out with the antibiotics!");
 		
 		failurePoint.setSCEffect(-300);
 		victoryPoint.setSCEffect(500);
