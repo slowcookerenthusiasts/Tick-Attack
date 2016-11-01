@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class QuestDecisionPoint {
+public class QuestDecisionPoint implements Cloneable {
 
 	private String defaultText;
 	private ArrayList<QuestDecisionPoint> children = new ArrayList<QuestDecisionPoint>();
@@ -15,6 +15,13 @@ public class QuestDecisionPoint {
 	private boolean hasSCEffect;
 	private int sCEffect;
 
+	/**
+	 * QuestDecisionPoint constructor	
+	 * @param requiresChoice boolean indicating whether a player decision is required at the QuestDecisionPoint
+	 * @param rewardsExist boolean indicating whether there is a health, street cred, or item effect associated 
+	 * 		  with the QuestDecisionPoint.
+	 * @param nodeText String indicating the text that should be displayed upon reaching the decision point.
+	 */
 
 	public QuestDecisionPoint(boolean requiresChoice, boolean rewardsExist, String nodeText){
 		playerDecisionNeeded = requiresChoice;
@@ -27,11 +34,24 @@ public class QuestDecisionPoint {
 		childrenExist = false;
 	}
 
+	/**
+	 * 	
+	 * @param int effect representing the change in the player's health that should occur upon 
+	 *        reaching the QuestDecisionPoint.
+	 */
+
 	public void setHealthEffect(int effect){
 		hasHealthEffect = true;
 		hasRewards = true;
 		healthEffect = effect;
 	}
+
+
+	/**
+	 * 
+	 * @param int effect representing the change in the player's street cred that should occur upon 
+	 *        reaching the QuestDecisionPoint.
+	 */
 
 	public void setSCEffect(int effect){
 		hasSCEffect = true;
@@ -39,14 +59,21 @@ public class QuestDecisionPoint {
 		sCEffect = effect;
 	}
 
+	/**
+	 * 
+	 * @param rewardItem item meant to be added to the player's inventory upon reaching the QuestDecisionPoint
+	 */
+
 	public void setItemReward(Item rewardItem){
 		hasItemReward = true;
 		hasRewards = true;
 		itemReward = rewardItem;
 	}
-	
+
+
 	/**
-	 * 	
+	 * 	The following method adds a child as a node to another QuestDecisionPoint, this represents a possible direction 
+	 * a quest can move in from the QuestDecisionPoint the child is added to.
 	 * @param child questDecisionPoint object to be added
 	 * @param weight: a weight between 1 and 100 indicating how likely it should be that a given child occurs. 
 	 */
@@ -61,9 +88,11 @@ public class QuestDecisionPoint {
 		childrenProbs.add(weight);
 
 	}
-	
+
 	/**
 	 * getChosenChild() method
+	 * 
+	 * This method returns one of a nodes children in response to a player decision.
 	 * 
 	 * @param choice: a boolean indicating whether the user has chosen yes or no when presented an option in game
 	 * 				  yes corresponds to a choice with value true and indicates that the first of the QuestDecisionPoint's
@@ -83,27 +112,26 @@ public class QuestDecisionPoint {
 		}
 	}
 
-	//-----------------------------------------------------------------------------	
 	/**
 	 * generateChild() method
 	 * 
 	 * This method selects a child of the node in a quasi random fashion where nodes with higher weights are more
-	 * likely to be choosen. 
+	 * likely to be chosen. 
 	 */
 
 	public QuestDecisionPoint generateChild(){
 		if(!checkChildrenProbsExists()){
 			return null;
 		}
-		
+
 		int weightTotal= 0;
 		ArrayList<Double> childrenRelativeProbs = new ArrayList<Double>();
 		ArrayList<Double> childrenCumRelativeProbs = new ArrayList<Double>();
-		
+
 		for(int i=0; i<childrenProbs.size(); i++){
 			weightTotal = weightTotal+childrenProbs.get(i);
 		}
-		
+
 		for(int i=0; i<childrenProbs.size(); i++){
 			childrenRelativeProbs.add(i, (((double) childrenProbs.get(i))/((double)weightTotal)));
 		}
@@ -111,10 +139,10 @@ public class QuestDecisionPoint {
 		for(int i=1; i<childrenProbs.size(); i++){
 			childrenCumRelativeProbs.add(i,childrenCumRelativeProbs.get(i-1)+childrenRelativeProbs.get(i));
 		}
-		
+
 		Random generator = new Random();
 		double pick = generator.nextDouble();
-		
+
 		for(int i=0; i<childrenCumRelativeProbs.size(); i++){
 			if(pick <=childrenCumRelativeProbs.get(i)){
 				return children.get(i);
@@ -122,7 +150,12 @@ public class QuestDecisionPoint {
 		}
 		return null;
 	}
-	
+
+	/**
+	 * 	
+	 * @return boolean indicating whether the arrest list of probabilities for a nodes children contains any elements.
+	 */
+
 	private boolean checkChildrenProbsExists() {
 		if(childrenProbs.size() == 0){
 			System.out.println("No children exist for the given node.");
@@ -130,45 +163,103 @@ public class QuestDecisionPoint {
 		} return true;
 	}
 
+	/**
+	 * 
+	 * @return String representing current quest state at the QuesdtDecisionPoint, meant to be seen by game player. 
+	 */
+
 	public String getDecisionText(){
 		return defaultText;	
 	}
+
+	/**
+	 * 
+	 * @param boolean indicating whether the node should expect a player decision to select which of it's children 
+	 *        should follow it in a quest. 
+	 */
 
 	public void takePlayerDecision(boolean choice ){
 		playerDecisionNeeded = choice;
 	}
 
+	/**
+	 * 	
+	 * @return boolean indicating whether a player decision is needed at the QuestDecisionPoint, true indicates
+	 *         a decision is needed, while false indicates a decision is not needed.
+	 */
 
 	public boolean getPlayerDecisionNeeded(){
 		return playerDecisionNeeded;
 	}
-	
+
+	/**
+	 * 	
+	 * @return boolean indicating whether the given QuestDecisionPoint has children.
+	 */
+
 	public boolean hasChildren(){
 		return childrenExist;
 	}
 
 
+	/**
+	 * 
+	 * @return boolean indicating whether upon reaching the node an item should be added to the player's inventory.
+	 */
+
 	public boolean getHasItemReward(){
 		return hasItemReward;
 	}
+
+
+	/**
+	 * 
+	 * @return boolean indicating whether the node is meant to change the player's health.
+	 */
+
 
 	public boolean getHasHealthEffect(){
 		return hasHealthEffect;
 	}
 
+	/**
+	 * 
+	 * @return boolean indicating whether the node is meant to change the player's street cred.
+	 */
+
 	public boolean getHasSCEffect(){
 		return hasSCEffect;
 	}
+
+	/**
+	 * 
+	 * @return item reward associated with the QuestDecisionPoint.
+	 */
 
 	public Item getItemReward(){
 		return itemReward;
 	}
 
+
+	/**
+	 * 
+	 * @return int representing the change to the player's health meant to be associated with the
+	 *         QuestDecisionPoint.
+	 */
+
 	public int getHealthEffect(){
 		return healthEffect;
 	}
 
+
+	/**
+	 * 
+	 * @return int representing the change to the player's street cred meant to be associated with the
+	 *         QuestDecisionPoint.
+	 */
+
 	public int getSCEffect(){
 		return sCEffect;
 	}	
+
 }
