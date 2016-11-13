@@ -29,5 +29,17 @@ public class Item {
 	public int getHealthBenefits() {
 		return healthBenefits;
 	}
+	
+	@Override
+	public boolean equals(Object o){
+		if (o == null)
+			return false;
+		if (!o.getClass().isAssignableFrom(Item.class))
+			return false;
+		
+		Item i = (Item) o;
+		
+		return (this.name.equals(i.name) && this.healthBenefits == i.healthBenefits);
+	}
 
 }

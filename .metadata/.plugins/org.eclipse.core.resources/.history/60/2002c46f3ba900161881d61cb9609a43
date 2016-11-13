@@ -1,0 +1,10 @@
+
+public class CountCondition implements Condition{
+
+	@Override
+	public boolean met() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

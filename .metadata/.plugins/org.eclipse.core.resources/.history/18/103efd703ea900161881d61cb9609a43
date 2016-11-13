@@ -1,0 +1,5 @@
+<randomGate>
+	id:1
+	playerDecisionNeeded:true
+	children:[(1
+	Condition:CountCondition(5)

@@ -1,0 +1,18 @@
+
+public class CountCondition implements Condition{
+
+	int counter;
+	
+	public CountCondition(int upTo){
+		
+	}
+	
+	@Override
+	public boolean met() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	
+
+}

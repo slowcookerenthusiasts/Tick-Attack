@@ -1,0 +1,19 @@
+
+public class CountCondition implements Condition{
+
+	int counter;
+	int benchmark;
+	
+	public CountCondition(int upTo){
+		this.benchmark = upTo;
+	}
+	
+	@Override
+	public boolean met() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	
+
+}

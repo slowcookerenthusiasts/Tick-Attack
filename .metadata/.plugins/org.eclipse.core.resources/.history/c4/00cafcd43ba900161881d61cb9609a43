@@ -1,0 +1,19 @@
+
+public class CountCondition implements Condition{
+
+	int counter;
+	int max;
+	
+	public CountCondition(int max){
+		this.max = max;
+	}
+	
+	@Override
+	public boolean met() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	
+
+}

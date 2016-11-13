@@ -1,0 +1,223 @@
+<node>
+	id:0
+	playerDecisionNeeded:false
+	children:[]
+	
+	<text>
+		You have decided to try and smuggle some Lyme antibiotics across the border from Maine.
+	</text>
+	
+	<reward>
+		item:
+		health:
+		streetCred:
+	</reward>
+</node>
+
+<node>
+	id:1
+	playerDecisionNeeded:false
+	children:[]
+	
+	<text>
+		For questionable reasons, it is illegal to bring this medicine into New Brunswick from the US.
+	</text>
+	
+	<reward>
+		item:
+		health:
+		streetCred:
+	</reward>
+</node>
+
+<node>
+	id:2
+	playerDecisionNeeded:false
+	children:[]
+	
+	<text>
+		If you are caught, the border guards will not be happy! :( 
+	</text>
+	
+	<reward>
+		item:
+		health:
+		streetCred:
+	</reward>
+</node>
+
+<node>
+	id:3
+	playerDecisionNeeded:false
+	children:[]
+	
+	<text>
+		What a bright and beautiful day to smuggle some antibiotics! 
+	</text>
+	
+	<reward>
+		item:
+		health:
+		streetCred:
+	</reward>
+</node>
+
+<node>
+	id:4
+	playerDecisionNeeded:false
+	children:[]
+	
+	<text>
+		You have driven up to the border crossing, a border guard approaches your car... 
+	</text>
+	
+	<reward>
+		item:
+		health:
+		streetCred:
+	</reward>
+</node>
+
+<node>
+	id:5
+	playerDecisionNeeded:true
+	children:[]
+	
+	<text>
+		Would you like to try and distract the guard?
+	</text>
+	
+	<reward>
+		item:
+		health:
+		streetCred:
+	</reward>
+</node>
+
+<node>
+	id:6
+	playerDecisionNeeded:false
+	children:[]
+	
+	<text>
+		The guard grows suspicious...
+	</text>
+	
+	<reward>
+		item:
+		health:
+		streetCred:
+	</reward>
+</node>
+
+<node>
+	id:7
+	playerDecisionNeeded:false
+	children:[]
+	
+	<text>
+		The guard smiles and lets you by, as you start to drive he glances over...
+	</text>
+	
+	<reward>
+		item:
+		health:
+		streetCred:
+	</reward>
+</node>
+
+<node>
+	id:8
+	playerDecisionNeeded:false
+	children:[]
+	
+	<text>
+		...The guard decides to search your car...
+	</text>
+	
+	<reward>
+		item:
+		health:
+		streetCred:
+	</reward>
+</node>
+
+<node>
+	id:9
+	playerDecisionNeeded:true
+	children:[]
+	
+	<text>
+		Rats! You got caught!! Do you want to jump out of the car and make a run for it?
+	</text>
+	
+	<reward>
+		item:
+		health:
+		streetCred:
+	</reward>
+</node>
+
+<node>
+	id:10
+	playerDecisionNeeded:false
+	children:[]
+	
+	<text>
+		You leap from the car and sprint towards the nearest Canadian tree line!
+	</text>
+	
+	<reward>
+		item:
+		health:
+		streetCred:
+	</reward>
+</node>
+
+<node>
+	id:11
+	playerDecisionNeeded:false
+	children:[]
+	
+	<text>
+		You are immediately tackled and arrested. :(
+	</text>
+	
+	<reward>
+		item:
+		health:
+		streetCred:
+	</reward>
+</node>
+
+<node>
+	id:12
+	playerDecisionNeeded:false
+	children:[]
+	
+	<text>
+		Using your ninja skills you dodge and weave past Canadian border security and escape into the forest!
+	</text>
+	
+	<reward>
+		item:
+		health:
+		streetCred:
+	</reward>
+</node>
+
+<node>
+	id:12
+	playerDecisionNeeded:false
+	children:[]
+	
+	<text>
+		Using your ninja skills you dodge and weave past Canadian border security and escape into the forest!
+	</text>
+	
+	<reward>
+		item:
+		health:
+		streetCred:
+	</reward>
+</node>

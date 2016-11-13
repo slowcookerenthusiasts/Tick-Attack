@@ -1,0 +1,22 @@
+
+public class CountCondition implements Condition{
+
+	int counter;
+	int upTo;
+	
+	public CountCondition(int upTo){
+		this.counter = 0;
+		this.upTo = upTo;
+	}
+	
+	@Override
+	public boolean met() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	private void increment(){
+		counter++;
+	}
+
+}

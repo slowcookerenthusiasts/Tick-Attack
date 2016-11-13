@@ -303,5 +303,37 @@ public class QuestDecisionPoint implements Cloneable {
 	public int getSCEffect(){
 		return sCEffect;
 	}	
+	
+	@Override
+	public boolean equals(Object o){
+		if (o == null)
+			return false;
+		if (!o.getClass().isAssignableFrom(QuestDecisionPoint.class))
+			return false;
+		
+		QuestDecisionPoint q = (QuestDecisionPoint) o;
+		
+		if ((this.children.size() != q.children.size()) || (this.childrenProbs.size() != q.childrenProbs.size()))
+			return false;
+		
+		for (int i = 0; i < this.children.size(); i++){
+			if (!this.children.get(i).equals(q.children.get(i)))
+				return false;
+			if (!this.childrenProbs.get(i).equals(q.childrenProbs.get(i)))
+				return false;
+		}
+		
+		return (this.defaultText.equals(q.defaultText)
+				&& (this.playerDecisionNeeded == q.playerDecisionNeeded)
+				&& (this.childrenExist == q.childrenExist)
+				&& (this.hasRewards == q.hasRewards)
+				&& (this.hasItemReward == q.hasItemReward)
+				&& (this.itemReward.equals(q.itemReward))
+				&& (this.hasHealthEffect == q.hasHealthEffect)
+				&& (this.healthEffect == this.healthEffect)
+				&& (this.hasSCEffect == this.hasSCEffect)
+				&& (this.sCEffect == this.sCEffect));
+		
+	}
 
 }

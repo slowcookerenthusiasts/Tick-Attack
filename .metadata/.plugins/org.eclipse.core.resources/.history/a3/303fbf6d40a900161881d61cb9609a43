@@ -1,0 +1,87 @@
+<randomGate>
+	id:1
+	playerDecisionNeeded:false
+	children:[]
+	Condition:CountCondition(5)
+	possibleIdentities:[(2,0.25),(3,0.25),(4,0.25),(5,0.25)]
+<randomGate>
+
+<node>
+	id:2
+	playerDecisionNeeded:false
+	children:[]
+	
+	<text>
+		You stop to grab a bite. From amidst the crowd, a child wails like a banshee. (-1 hp)
+	<text/>
+	
+	<reward>
+		item:
+		health:-1
+		streetCred:
+	</reward>
+<node>
+
+<node>
+	id:3
+	playerDecisionNeeded:false
+	children:[]
+	
+	<text>
+		Sam stops to rest his legs.
+	<text/>
+	
+	<reward>
+		item:
+		health:
+		streetCred:
+	</reward>
+<node>
+
+<node>
+	id:4
+	playerDecisionNeeded:false
+	children:[]
+	
+	<text>
+		Sam stops to rest his legs.
+	<text/>
+	
+	<reward>
+		item:
+		health:
+		streetCred:
+	</reward>
+<node>
+
+<node>
+	id:5
+	playerDecisionNeeded:false
+	children:[(6,0.5),(7,0.5)]
+	
+	<text>
+		A man runs at you swooshing flyers in your face!
+	<text/>
+	
+	<reward>
+		item:
+		health:
+		streetCred:
+	</reward>
+<node>
+
+<node>
+	id:5
+	playerDecisionNeeded:false
+	children:[(6,0.5),(7,0.5)]
+	
+	<text>
+		A man runs at you swooshing flyers in your face!
+	<text/>
+	
+	<reward>
+		item:
+		health:
+		streetCred:
+	</reward>
+<node>

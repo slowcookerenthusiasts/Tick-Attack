@@ -1,0 +1,6 @@
+<randomGate>
+	id:1
+	playerDecisionNeeded:true
+	children
+	Condition:CountCondition(5)
+	possibleIdentities:[(2,0.25),(3,0.25),(4,0.25),(5,0.25)]
